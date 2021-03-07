@@ -1,32 +1,21 @@
-const tasks = [
-  {
-    id: 1,
-    text: "Go to Pharmacy",
-    day: "March 10th at 10:30am",
-    reminder: true
-  },
-  {
-    id: 2,
-    text: "Submit invoice",
-    day: "March 12th at 9:00am",
-    reminder: true
-  },
-  {
-    id: 3,
-    text: "Fill out application",
-    day: "March 20th at 5:00pm",
-    reminder: false
-  }
-];
+/* eslint-disable react/react-in-jsx-scope */
+import PropTypes from "prop-types";
+import Task from "./Task";
 
-const Tasks = () => {
+const Tasks = ({ tasks, deleteTask }) => {
   return (
         <>
         {tasks.map((task) => (
-             <h3 key={task.id}>{task.text}</h3>
+             <Task key={task.id} deleteTask={deleteTask} task={task}/>
         ))}
         </>
   );
 };
 
+
+Tasks.propTypes = {
+    tasks: PropTypes.array,
+    deleteTask: PropTypes.func
+}
+  
 export default Tasks;
