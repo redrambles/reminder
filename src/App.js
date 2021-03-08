@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/react-in-jsx-scope */
 import { useState } from "react";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
+import AddTask from "./components/AddTask";
 
 function App () {
-  const [tasks] = useState([
+  const [tasks, setTasks] = useState([
     {
       id: 1,
       text: "Go to Pharmacy",
@@ -26,13 +28,38 @@ function App () {
   ]);
 
   const deleteTask = (id) => {
-    console.log('delete', id)
-  }
+    setTasks(tasks.filter((task) => (
+       task.id !== id
+     ))
+    );
+  };
+
+  const toggleReminder = (id) => {
+    setTasks(tasks.map((task) => {
+      if (task.id === id){
+        return {...task, reminder: !task.reminder};
+      }
+      return task;
+    }));
+  };
+
+  const addTask = (text, day, reminder) => {
+    const newTask = {
+      id: Math.floor(Math.random() * 10000 + 1),
+      text: text,
+      day: day,
+      reminder: reminder
+    };
+    setTasks([...tasks, newTask]);
+  };
 
   return (
     <div className="container">
     <Header title="Task Tracker" />
-    <Tasks deleteTask={deleteTask} tasks={tasks}/>
+    {tasks.length > 0 ? 
+      <Tasks onDelete={deleteTask} onToggle={toggleReminder} tasks={tasks}/>
+    : "No tasks at the moment."}
+    <AddTask addTask={addTask}/>
     </div>
   );
 }

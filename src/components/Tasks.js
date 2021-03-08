@@ -2,11 +2,11 @@
 import PropTypes from "prop-types";
 import Task from "./Task";
 
-const Tasks = ({ tasks, deleteTask }) => {
+const Tasks = ({ tasks, onDelete, onToggle }) => {
   return (
         <>
         {tasks.map((task) => (
-             <Task key={task.id} deleteTask={deleteTask} task={task}/>
+             <Task key={task.id} onToggle={onToggle} onDelete={onDelete} task={task}/>
         ))}
         </>
   );
@@ -15,7 +15,8 @@ const Tasks = ({ tasks, deleteTask }) => {
 
 Tasks.propTypes = {
     tasks: PropTypes.array,
-    deleteTask: PropTypes.func
-}
+    onDelete: PropTypes.func,
+    onToggle: PropTypes.func
+};
   
 export default Tasks;

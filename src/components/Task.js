@@ -3,24 +3,27 @@
 import PropTypes from "prop-types";
 import { FaTimes } from "react-icons/fa";
 
-const Task = ({task, deleteTask}) => {
+const Task = ({task, onDelete, onToggle}) => {
 
+    const ToggleReminder = () => {
+        onToggle(task.id);
+    };
     const removeTask = () => {
-        deleteTask(task.id);
-    }
+        onDelete(task.id);
+    };
 
     return (
-        <div className="task">
+        <div className={`task ${task.reminder ? "reminder" : ""}`} onDoubleClick={ToggleReminder}>
             <h3>{task.text} <FaTimes style={faStyle} onClick={removeTask}/></h3>
             <p>{task.day}</p>
         </div>
-    )
-}
+    );
+};
 
 const faStyle = {
     color: "red",
     cursor: "pointer"
-}
+};
 
 Task.propTypes = {
    text: PropTypes.string,
@@ -28,4 +31,4 @@ Task.propTypes = {
 };
 
 
-export default Task
+export default Task;
