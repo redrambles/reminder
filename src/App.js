@@ -6,6 +6,7 @@ import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 
 function App () {
+  const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -46,20 +47,24 @@ function App () {
   const addTask = (text, day, reminder) => {
     const newTask = {
       id: Math.floor(Math.random() * 10000 + 1),
-      text: text,
-      day: day,
-      reminder: reminder
+      text,
+      day,
+      reminder
     };
     setTasks([...tasks, newTask]);
   };
 
+  const onAddTask = () =>{
+    setShowAddTask(!showAddTask);
+  };
+
   return (
     <div className="container">
-    <Header title="Task Tracker" />
+    <Header title="Task Tracker" onClick={onAddTask} showAddTask={showAddTask} />
+    {showAddTask && <AddTask addTask={addTask}/>}
     {tasks.length > 0 ? 
       <Tasks onDelete={deleteTask} onToggle={toggleReminder} tasks={tasks}/>
     : "No tasks at the moment."}
-    <AddTask addTask={addTask}/>
     </div>
   );
 }
