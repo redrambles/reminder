@@ -7,6 +7,7 @@ const AddTask = ({addTask}) => {
     const [text, setText] = useState("");
     const [day, setDay] = useState("");
     const [reminder, setReminder] = useState(false);
+    const [message, setMessage] = useState("");
 
     const onChangeText = (e) => {
         setText(e.target.value);
@@ -21,19 +22,22 @@ const AddTask = ({addTask}) => {
     };
 
     const createTask = (e) => {
+        setMessage("");
         e.preventDefault();
         if (text.length === 0){
-            alert("Please enter a task.");
-            return;
+            setMessage("Please enter a task.");
+        } else {
+
+            addTask(text, day, reminder);
+            setText("");
+            setDay("");
+            setReminder(false);
         }
-        addTask(text, day, reminder);
-        setText("");
-        setDay("");
-        setReminder(false);
     };
 
     return (
         <form className="add-form" onSubmit={createTask}>
+            {message && <p> {message} </p>}
             <div className="form-control">
                 <label>Task</label>
                 <input type="text" value={text} onChange={onChangeText} placeholder="Add Task"/>

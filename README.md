@@ -75,3 +75,4 @@ Installed serve globally (sudo npm i -g serve)
 Launched it: serve -s build -p 8000 = then visited on localhost:8000
 
 the 'build' folder contents contain what must be deployed.
+Is deployed on Netlify
