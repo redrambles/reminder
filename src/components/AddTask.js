@@ -27,7 +27,6 @@ const AddTask = ({addTask}) => {
         if (text.length === 0){
             setMessage("Please enter a task.");
         } else {
-
             addTask(text, day, reminder);
             setText("");
             setDay("");
