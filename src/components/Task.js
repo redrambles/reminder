@@ -1,34 +1,39 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/prop-types */
-import PropTypes from "prop-types";
-import { FaTimes } from "react-icons/fa";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FaTimes } from 'react-icons/fa';
 
-const Task = ({task, onDelete, onToggle}) => {
+const Task = ({ task, onDelete, toggleReminder }) => {
+    console.log(task)
 
-    const ToggleReminder = () => {
-        onToggle(task.id);
-    };
-    const removeTask = () => {
-        onDelete(task.id);
-    };
-
-    return (
-        <div className={`task ${task.reminder ? "reminder" : ""}`} onDoubleClick={ToggleReminder}>
-            <h3>{task.text} <FaTimes style={faStyle} onClick={removeTask}/></h3>
-            <p>{task.day}</p>
-        </div>
-    );
+	return (
+		<div className={`task ${task.reminder ? 'reminder' : ''}`} onDoubleClick={() => toggleReminder(task.id)}>
+			<h3>
+				{task.text} <FaTimes style={faStyle} onClick={() => onDelete(task.id)} />
+			</h3>
+			<p>{task.day}</p>
+		</div>
+	);
 };
 
 const faStyle = {
-    color: "red",
-    cursor: "pointer"
+	color: 'red',
+	cursor: 'pointer',
 };
 
 Task.propTypes = {
-   text: PropTypes.string,
-   deleteTask: PropTypes.func
+	text: PropTypes.string,
+	deleteTask: PropTypes.func,
+    toggleReminder: PropTypes.func,
+    onDelete: PropTypes.func,
+    task: PropTypes.shape({
+        reminder: PropTypes.bool.isRequired,
+        id: PropTypes.number.isRequired,
+        text: PropTypes.string.isRequired,
+        day: PropTypes.string,
+    }),
 };
 
-
 export default Task;
+
+
+
