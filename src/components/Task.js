@@ -21,10 +21,8 @@ const faStyle = {
 };
 
 Task.propTypes = {
-	text: PropTypes.string,
-	deleteTask: PropTypes.func,
-    toggleReminder: PropTypes.func,
-    onDelete: PropTypes.func,
+    toggleReminder: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
     task: PropTypes.shape({
         reminder: PropTypes.bool.isRequired,
         id: PropTypes.number.isRequired,
